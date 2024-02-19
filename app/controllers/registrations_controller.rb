@@ -12,12 +12,12 @@ class RegistrationsController < ApplicationController
       # respond_to do |format|
       #   format.js { render 'registrations/create'}
       # end
-      respond_to do |format|
-        format.html { redirect_to new_registration_path }
-      format.json { render json: @create_options }
-      end
+      # respond_to do |format|
+      #   format.html { redirect_to new_registration_path }
+      #   format.json { render json: @create_options }
+      # end
 
-      # render json: @create_options
+      render json: @create_options
     end
   end
 

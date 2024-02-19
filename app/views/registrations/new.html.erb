@@ -1,9 +1,33 @@
 <div>
-<h1>請註冊</h1>
-<%= form_with scope: :registration, url: registration_path, local: false, data: { controller: "new-registration", action: "ajax:success->new-registration#create ajax:error->new-registration#error" } do |form| %>
-  <%= form.text_field :username, placeholder: "請輸入名稱", required: true %>
-  <%= form.text_field :nickname, placeholder: "請輸入鑰匙名稱", required: true %>
-  <%= form.submit "Register" %>
-<% end %>
+  <h1>請註冊</h1>
+  <%= form_with scope: :registration, id: "registration-form", url: registration_path, local: false, data: { controller: "new-registration", action: "ajax:success->new-registration#create ajax:error->new-registration#error" } do |form| %>
+    <%= form.text_field :username, placeholder: "請輸入名稱", required: true %>
+    <%= form.text_field :nickname, placeholder: "請輸入鑰匙名稱", required: true %>
+    <%= form.submit "Register" %>
+  <% end %>
 </div>
 
+<script type="module">
+  import Credential from "src/credential"
+  const registrationForm = document.querySelector("#registration-form")
+  registrationForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    
+    fetch("<%= registration_path %>", {
+      method: "POST",
+      body: formData
+    }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      const credentialOptions = data
+      console.log(credentialOptions);
+      if (credentialOptions["user"]) {
+        const credentialNickname = registrationForm.querySelector("input[name='registration[nickname]']");
+        const callbackUrl = `/registration/callback?credential_nickname=${credentialNickname}`;
+        Credential.create(encodeURI(callbackUrl), credentialOptions);
+      }
+    })
+  })
+</script>

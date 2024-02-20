@@ -12,7 +12,7 @@ class User < ApplicationRecord
     {
       rp: {
         name: "Example App",
-        origin: "http://localhost:3000",
+        origin: ENV["WEBAUTHN_ORIGIN"],
       },
       authenticatorSelection: { 'userVerification': 'required' },
       user: {
@@ -28,6 +28,16 @@ class User < ApplicationRecord
       ],
       timeout: 120_000,
       attestation: "direct",
+    }
+  end
+
+  def get_options
+    {
+      #TODO: this part should be finished
+      allowCredentials: [{ type: "public-key", id: self.credentials.external_id }],
+      challenge: challenge,
+      timeout: 120_000,
+      userVerification: "required"
     }
   end
 

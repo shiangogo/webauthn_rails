@@ -72,3 +72,5 @@ group :test do
 end
 
 gem "cbor", "~> 0.5.9"
+
+gem "dotenv-rails", "~> 3.0"

@@ -1,4 +1,5 @@
 <div>
+  <%= flash[:flash] %>
   <h1>您好，歡迎登入</h1>
   <%= form_with scope: :session, id: "log-in-form", url: session_path, local: false do |form| %>
     <%= form.text_field :username, placeholder: "請輸入名稱", required: true %>

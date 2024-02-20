@@ -1,5 +1,10 @@
 class HomeController < ApplicationController
   def index
-    redirect_to new_registration_path
+    if current_user
+      @username = current_user.username
+      render "index"
+    else
+      redirect_to new_registration_path
+    end
   end
 end

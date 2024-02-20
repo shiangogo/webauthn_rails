@@ -32,21 +32,17 @@ function getCSRFToken() {
 
 export default class Credential {
   static create(callbackUrl, credentialOptions) {
-    // navigator.credentials
     WebauthnJSON.create({ publicKey: credentialOptions })
       .then(function (credential) {
-        console.log(callback);
         callback(callbackUrl, credential);
       })
       .catch(function (error) {
         console.error(error);
       });
-
     console.log("Creating new public key credential...");
   }
 
   static get(credentialOptions) {
-    // navigator.credentials
     WebauthnJSON.get({ publicKey: credentialOptions })
       .then(function (credential) {
         callback("/session/callback", credential);
@@ -54,7 +50,6 @@ export default class Credential {
       .catch(function (error) {
         console.error(error);
       });
-
     console.log("Getting public key credential...");
   }
 }

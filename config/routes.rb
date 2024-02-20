@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     post :callback
   end
 
-  resource :session, only: %i[new create] do
+  resource :session, only: %i[new create destroy] do
     post :callback
   end
 end

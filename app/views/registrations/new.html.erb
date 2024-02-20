@@ -3,8 +3,9 @@
   <%= form_with scope: :registration, id: "registration-form", url: registration_path, local: false do |form| %>
     <%= form.text_field :username, placeholder: "請輸入名稱", required: true %>
     <%= form.text_field :nickname, placeholder: "請輸入鑰匙名稱", required: true %>
-    <%= form.submit "Register" %>
+    <%= form.submit "註冊" %>
   <% end %>
+  <%= link_to "我已經有帳號了，請讓我登入", new_session_path %>
 </div>
 
 <script type="module">

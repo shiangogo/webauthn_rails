@@ -42,10 +42,12 @@ export default class Credential {
     console.log("Creating new public key credential...");
   }
 
-  static get(credentialOptions) {
+  static get(callbackUrl, credentialOptions) {
     WebauthnJSON.get({ publicKey: credentialOptions })
       .then(function (credential) {
-        callback("/session/callback", credential);
+        console.log(credential);
+        debugger;
+        callback(callbackUrl, credential);
       })
       .catch(function (error) {
         console.error(error);

@@ -9,10 +9,13 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(username: session_params[:username])
-    session[:current_authentication] = { challenge: user.challenge, username: user.username }
+    user_get_options = user.get_options
+    session[:current_authentication] = { challenge: user_get_options[:challenge], username: user.username }
+    render json: user_get_options
   end
 
   def callback
+
   end
 
   def destroy

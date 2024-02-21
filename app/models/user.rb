@@ -32,14 +32,17 @@ class User < ApplicationRecord
   end
 
   def get_options
+    p credentials
     {
       #TODO: this part should be finished
-      allowCredentials: [{ type: "public-key", id: self.credentials.external_id }],
+      allowCredentials: allowCredentials,
       challenge: challenge,
       timeout: 120_000,
       userVerification: "required"
     }
   end
+
+  private
 
   def raw_challenge
     SecureRandom.random_bytes(32)
@@ -48,5 +51,9 @@ class User < ApplicationRecord
   def challenge
     @raw_challenge ||= raw_challenge
     Base64.urlsafe_encode64(@raw_challenge, padding: false)
+  end
+
+  def allowCredentials
+    credentials.map { |credential| { type: "public-key", id: credential.external_id } }
   end
 end

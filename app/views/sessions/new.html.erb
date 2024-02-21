@@ -7,3 +7,25 @@
   <% end %>
   <%= link_to "我還沒有帳號，請讓我註冊", new_registration_path %>
 </div>
+
+<script type="module">
+  import Credential from "src/credential";
+  const loginForm = document.querySelector("#log-in-form");
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(loginForm);
+
+    fetch("<%= session_path %>", {
+      method: "POST",
+      body: formData
+    }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      const credentialOptions = data;
+      console.log(credentialOptions);
+      debugger;
+      Credential.get("<%= callback_session_path %>", credentialOptions);
+    })
+
+  })
+</script>

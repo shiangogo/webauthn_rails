@@ -30,7 +30,6 @@ class User < ApplicationRecord
   end
 
   def get_options
-    p credentials
     {
       allowCredentials: allowCredentials,
       challenge: challenge,
@@ -53,8 +52,4 @@ class User < ApplicationRecord
   def allowCredentials
     credentials.map { |credential| { type: "public-key", id: credential.external_id } }
   end
-
-  def verify_signature(data, signature, public_key)
-  end
-
 end

@@ -23,7 +23,6 @@
     }).then(function(data) {
       const credentialOptions = data;
       console.log(credentialOptions);
-      debugger;
       Credential.get("<%= callback_session_path %>", credentialOptions);
     })
 

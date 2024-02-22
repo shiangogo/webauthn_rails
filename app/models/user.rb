@@ -1,5 +1,3 @@
-require "base64"
-require "cbor"
 class User < ApplicationRecord
   has_many :credentials, dependent: :destroy
   validates :username, presence: true, uniqueness: true
@@ -34,7 +32,6 @@ class User < ApplicationRecord
   def get_options
     p credentials
     {
-      #TODO: this part should be finished
       allowCredentials: allowCredentials,
       challenge: challenge,
       timeout: 120_000,
@@ -56,4 +53,8 @@ class User < ApplicationRecord
   def allowCredentials
     credentials.map { |credential| { type: "public-key", id: credential.external_id } }
   end
+
+  def verify_signature(data, signature, public_key)
+  end
+
 end

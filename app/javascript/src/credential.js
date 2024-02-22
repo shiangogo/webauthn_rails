@@ -46,7 +46,6 @@ export default class Credential {
     WebauthnJSON.get({ publicKey: credentialOptions })
       .then(function (credential) {
         console.log(credential);
-        debugger;
         callback(callbackUrl, credential);
       })
       .catch(function (error) {

@@ -74,3 +74,7 @@ end
 gem "cbor", "~> 0.5.9"
 
 gem "dotenv-rails", "~> 3.0"
+
+gem "openssl", "~> 3.2"
+
+gem "cose", "~> 1.3"

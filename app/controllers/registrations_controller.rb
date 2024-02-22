@@ -49,9 +49,6 @@ class RegistrationsController < ApplicationController
 
       public_key = Base64.urlsafe_encode64(public_key_bytes, padding: false)
 
-      p credential_id
-      p public_key
-
       credential = user.credentials.build(
         external_id: credential_id,
         nickname: params[:credential_nickname],
@@ -71,4 +68,3 @@ class RegistrationsController < ApplicationController
     end
   end
 end
-
